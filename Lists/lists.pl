@@ -6,6 +6,14 @@ list_length(Len, [ _ | T]) :- list_length(Temp, T), Len is Temp + 1.
 append([], L, L).
 append([ H | T ], L , [ H | R ]):- append(T,L,R).
 
+% last(Elem, List) -> Elem is the last element of List
+last(Elem, {Elem}).
+last(Elem, [ _ | Tail]) :- last(Elem, Tail).
+
+% reverse(L, Reversed)
+reverse([],[]).
+reverse( [ H | T ] , Result):- reverse(T, TempResult), append(TempResult,[H], Result).
+
 % member(Elem, List) -> is Elem member of List
 member_sonik(Elem, [ Elem | _ ]).
 member_sonik(Elem, [ H | Tail ]):-member(Elem,Tail), H \= Elem.
